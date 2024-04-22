@@ -2,9 +2,9 @@ import streamlit as st
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.embeddings import OpenAIEmbeddings, HuggingFaceInstructEmbeddings
+from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.vectorstores.faiss import FAISS
-from InstructorEmbedding import INSTRUCTOR
+#from InstructorEmbedding import INSTRUCTOR
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
