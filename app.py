@@ -4,7 +4,6 @@ from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.embeddings import OpenAIEmbeddings, HuggingFaceInstructEmbeddings
 from langchain.vectorstores.faiss import FAISS
-from InstructorEmbedding import INSTRUCTOR
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
@@ -31,19 +30,14 @@ def get_text_chunks(text):
     return chunks
 
 def get_vectorstore(text_chunks, openai_api_key):
-    #embeddings = OpenAIEmbeddings()
     embeddings = OpenAIEmbeddings(openai_api_key = openai_api_key)
-    #embeddings = HuggingFaceInstructEmbeddings(model_name="textembedding-gecko@003")
     vectorstore = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
     return vectorstore
 
 def get_conversation_chain(vectorstore, openai_api_key):
-    #llm = ChatOpenAI()
     llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613", openai_api_key= openai_api_key, streaming=True
     )
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
-
-    #llm = HuggingFaceHub(repo_id="mixedbread-ai/mxbai-embed-large-v1", model_kwargs={"temperature":0.5, "max_length":512}) 
 
     conversation_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
@@ -74,15 +68,13 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = None
 
-    st.header("Chat with multiple PDFs :books:") 
-    #st.text_input("Ask a question about your documents: ")   
+    st.header("Chat with multiple PDFs :books:")  
     user_question = st.text_input("Ask a question about your documents:")
     
     if user_question:
         handle_userinput(user_question)
     
     with st.sidebar:
-        #openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
         "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
 
         openai_api_key = st.session_state.get("openai_api_key", None)
