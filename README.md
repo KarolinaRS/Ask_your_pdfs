@@ -26,7 +26,7 @@ A live version of the application can be found on Streamlit Community Cloud http
 
 To run the ASK your PDFs locally, you will need to have Python 3.10 or higher installed. Then, you can clone the repository to your local machine and install the required packages by running:
 
-1. `git clone`
+1. `git clone https://github.com/KarolinaRS/Ask_your_pdfs.git`
 
 2. `pip install -r requirements.txt`
 
