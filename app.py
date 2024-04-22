@@ -82,7 +82,7 @@ def main():
                 st.warning('Please, enter your OPENAI_API_KEY', icon='⚠️')
                 stop = True
             else:
-                st.success('Ask Hacker News whatever you want!', icon='👉')
+                st.success('Upload your PDFs and ask them what you want!', icon='👉')
                 st.session_state["openai_api_key"] = openai_api_key
 
         st.subheader("Your documents")
